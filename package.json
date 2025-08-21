@@ -1,0 +1,16 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Brain_Stroke_Prediction This project aims to use machine learning to predict stroke risk, a leading cause of long-term disability and mortality worldwide. The study uses a dataset with patient demographic and health features to explore the predictive capabilities of three algorithms: Artificial Neural Networks (ANN), Decision Trees, and Naive Bayes. The primary objectives are to build a predictive model for stroke risk, assess and compare the performance of these algorithms, and deploy the best-performing model in a web-based application for easy access for healthcare professionals and patients. The ANN model demonstrated the highest accuracy, while the Decision Tree model offered interpretability and was effective in cases where independence between features could be reasonably assumed. An interactive web application with a user-friendly interface was developed, allowing users to input individual health data and receive immediate stroke risk predictions. Future developments include expanding the model's predictive capacity with additional features and real-time data integration from wearable health monitoring devices. Ensemble learning approaches could also be investigated to further enhance predictive accuracy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0"
+  }
+}
