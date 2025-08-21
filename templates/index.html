@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Risk Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 1.8rem;
+        }
+        
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .result {
+            margin-top: 2rem;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .result.positive {
+            background: #fdf2f2;
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
+        }
+        
+        .result.negative {
+            background: #f0f9f0;
+            color: #27ae60;
+            border: 2px solid #27ae60;
+        }
+        
+        .info-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .info-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .info-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧠 Brain Stroke Prediction System</h1>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+    
+    <div class="container">
+        <h2>Stroke Risk Assessment</h2>
+        
+        <div class="info-section">
+            <h3>About This Assessment</h3>
+            <p>This AI-powered system uses advanced machine learning algorithms (ANN, Decision Tree, and Naive Bayes) to predict stroke risk based on your health data. Please fill out all fields accurately for the most reliable prediction.</p>
+        </div>
+        
+        <form action="/result" method="POST">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select name="gender" id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="0">Female</option>
+                        <option value="1">Male</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" name="age" id="age" min="1" max="120" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hypertension">Hypertension:</label>
+                    <select name="hypertension" id="hypertension" required>
+                        <option value="">Select</option>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="disease">Heart Disease:</label>
+                    <select name="disease" id="disease" required>
+                        <option value="">Select</option>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="married">Ever Married:</label>
+                    <select name="married" id="married" required>
+                        <option value="">Select</option>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="work">Work Type:</label>
+                    <select name="work" id="work" required>
+                        <option value="">Select Work Type</option>
+                        <option value="1">Never Worked</option>
+                        <option value="2">Private</option>
+                        <option value="3">Self-employed</option>
+                        <option value="4">Children</option>
+                        <option value="0">Government Job</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="residence">Residence Type:</label>
+                    <select name="residence" id="residence" required>
+                        <option value="">Select Residence</option>
+                        <option value="0">Rural</option>
+                        <option value="1">Urban</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="avg_glucose_level">Average Glucose Level (mg/dL):</label>
+                    <input type="number" name="avg_glucose_level" id="avg_glucose_level" step="0.01" min="50" max="300" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bmi">BMI (Body Mass Index):</label>
+                    <input type="number" name="bmi" id="bmi" step="0.1" min="10" max="50" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="smoking">Smoking Status:</label>
+                    <select name="smoking" id="smoking" required>
+                        <option value="">Select Smoking Status</option>
+                        <option value="1">Formerly Smoked</option>
+                        <option value="2">Never Smoked</option>
+                        <option value="3">Smokes</option>
+                        <option value="0">Unknown</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn">Predict Stroke Risk</button>
+        </form>
+        
+        {% if prediction_text %}
+            <div class="result {% if 'does not have' in prediction_text %}negative{% else %}positive{% endif %}">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
